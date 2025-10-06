@@ -7,18 +7,44 @@
 </head>
 <body>
   <h1>商品列表</h1>
+
   <a href="/cart">🛒 购物车</a> | <a href="/admin">📦 上架商品</a>
-  <ul id="list">
-    <% products.forEach(p => { %>
-      <li>
-        <strong><%= p.name %></strong> -
-        ¥<%= p.price.toFixed(2) %>
-        <button onclick="addToCart(<%= p.id %>, '<%= p.name %>', <%= p.price %>)">
-          加入购物车
-        </button>
+  <!-- 滚动加载容器 -->
+ <div id="product-container">
+  <ul id="product-list">
+    <% products.forEach(product => { %>
+      <li class="card">
+        <img class="card__img" src="<%= product.image %>" alt="<%= product.name %>" onerror="this.src='/images/placeholder.png'">
+        <h3 class="card__title"><%= product.name %></h3>
+        <p class="card__price">
+          <%= lang === 'zh' ? (product.price * 7).toFixed(2) + ' CNY' : product.price.toFixed(2) + ' USD' %>
+        </p>
+        <button class="btn" onclick="addToCart(<%= product.id %>, '<%= product.name %>', <%= product.price %>)">Add to Cart</button>
       </li>
     <% }) %>
   </ul>
+
+  
+
+
   <script src="/script.js"></script>
 </body>
+<link rel="stylesheet" href="/style.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<style>
+  /* 本地字体也走变量 */
+  @font-face {
+    font-family: 'MyFont';
+    src: url('/fonts/Roboto-Regular.ttf') format('truetype');
+  }
+  body { font-family: var(--font); }
+</style>
+
+<header class="top-bar">
+  <img src="/images/logo.png" alt="logo" class="logo">
+  <a href="/cart" class="btn">购物车</a>
+</header>
+
+<button class="btn">加入购物车</button>
+
 </html>

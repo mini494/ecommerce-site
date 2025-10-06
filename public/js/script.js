@@ -67,4 +67,28 @@ function processPayment() {
       window.location.href = '/';
     }
   });
+
+  let page = 1;
+function loadMore() {
+  page++;
+  fetch(`/?page=${page}&lang=${document.querySelector('a[href*="lang"]').getAttribute('href').split('lang=')[1] || 'en'}`)
+    .then(res => res.text())
+    .then(html => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const newItems = doc.querySelectorAll('#product-list li');
+      newItems.forEach(item => document.getElementById('product-list').appendChild(item));
+      const hasMore = doc.querySelector('#load-more');
+      if (hasMore) document.getElementById('load-more').outerHTML = hasMore.outerHTML;
+      else document.getElementById('load-more').remove();
+    });
+}
+document.getElementById('load-more')?.addEventListener('click', loadMore);
+window.addEventListener('scroll', () => {
+  const loadMore = document.getElementById('load-more');
+  if (loadMore && window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+    loadMore.click();
+  }
+});
+
 }

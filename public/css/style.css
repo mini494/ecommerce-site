@@ -2,7 +2,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 20px;
   background-color: #f5dbbb; /* 背景色 */
-  color: #333; /* 文字色 */
+  color: #81490a; /* 文字色 */
 }
 ul { list-style: none; }
 li { border: 1px solid #ddd; padding: 10px; margin: 10px 0; }
@@ -14,3 +14,98 @@ button {
   cursor: pointer;
 }
 input, textarea { display: block; margin: 10px 0; padding: 10px; width: 300px; }
+
+/* ===== 设计令牌（Design Tokens） ===== */
+:root {
+  --primary:   #ff5733;   /* 主按钮 */
+  --secondary: #81490a;   /* 文字 */
+  --bg:        #f5dbbb;   /* 页面背景 */
+  --card-bg:   #ffffff;   /* 卡片 */
+  --radius:    8px;
+  --spacing:   20px;
+  --shadow:    0 2px 6px rgba(0,0,0,.08);
+  --font:      "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* ===== 全局应用 ===== */
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--secondary);
+}
+
+/* 例子：按钮 */
+.btn {
+  padding: 10px 18px;
+  background: var(--primary);
+  color: #ecaaaa;
+  border: none;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: .3s;
+}
+.btn:hover { opacity: .9; }
+
+/* ===== 分类导航高亮 ===== */
+.cat-nav {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.cat-nav a {
+  padding: 6px 12px;
+  background: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #333333;
+}
+
+.cat-nav a:hover,
+.cat-nav a.active {
+  background: #ff5733;   /* 你之前写的 --primary 颜色 */
+  color: #ffffff;
+}
+/* ===== 商品图片标准规格 ===== */
+.card__img {
+  width: 250px;          /* 电商常见宽度 */
+  height: 250px;         /* 固定正方形 */
+  object-fit: cover;     /* 裁剪居中，不变形 */
+  border-radius: 8px;    /* 圆角美观 */
+  background: #f0f0f0;   /* 加载前占位色 */
+}
+
+/* ===== 商品网格 ===== */
+#product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 260px); /* 每列 260px（250+间隙） */
+  gap: 20px;               /* 卡片间距 */
+  justify-content: center; /* 居中排列 */
+  padding: 20px;
+}
+
+/* 单个卡片基础样式 */
+.card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+  transition: transform .2s;
+}
+.card:hover { transform: translateY(-4px); }
+
+/* ===== 手机：一列撑满 ===== */
+@media (max-width: 600px) {
+  #product-list {
+    grid-template-columns: 1fr;   /* 一列 */
+    padding: 10px;
+  }
+  .card__img {
+    width: 100%;      /* 图片撑满卡片 */
+    height: auto;     /* 高度自适应，避免裁剪 */
+  }
+}
