@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="<%= lang %>">
+<head>
+  <meta charset="UTF-8">
+  <title>Cart</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <h1><%= lang === 'zh' ? '购物车' : 'Shopping Cart' %></h1>
+  <a href="/?lang=zh">中文</a> | <a href="/?lang=en">English</a>
+  <ul id="cart-items"></ul>
+  <p>Total: <span id="total">0</span> USD</p>
+  <a href="/checkout">Checkout</a>
+  <script src="/js/script.js"></script>
+  <script>displayCart();</script>
+</body>
+</html>

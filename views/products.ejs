@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>商品列表</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <h1>商品列表</h1>
+  <a href="/cart">🛒 购物车</a> | <a href="/admin">📦 上架商品</a>
+  <ul id="list">
+    <% products.forEach(p => { %>
+      <li>
+        <strong><%= p.name %></strong> -
+        ¥<%= p.price.toFixed(2) %>
+        <button onclick="addToCart(<%= p.id %>, '<%= p.name %>', <%= p.price %>)">
+          加入购物车
+        </button>
+      </li>
+    <% }) %>
+  </ul>
+  <script src="/script.js"></script>
+</body>
+</html>

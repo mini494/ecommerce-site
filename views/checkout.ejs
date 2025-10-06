@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="<%= lang %>">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <h1><%= lang === 'zh' ? '结账' : 'Checkout' %></h1>
+  <a href="/?lang=zh">中文</a> | <a href="/?lang=en">English</a>
+  <ul id="cart-items"></ul>
+  <p>Total: <span id="total">0</span> USD</p>
+  <input type="text" id="discountCode" placeholder="Discount Code">
+  <button onclick="applyDiscount()">Apply Discount</button>
+  <form id="payment-form">
+    <!-- 模拟支付表单；真实用Stripe Elements -->
+    <input type="text" placeholder="Card Number" required>
+    <input type="text" placeholder="Expiry Date" required>
+    <input type="text" placeholder="CVV" required>
+    <button type="button" onclick="processPayment()">Pay</button>
+  </form>
+  <script src="/js/script.js"></script>
+  <script>displayCart(); calculateTotal();</script>
+</body>
+</html>
